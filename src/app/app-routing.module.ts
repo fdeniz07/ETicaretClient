@@ -1,10 +1,12 @@
+import { HomeComponent } from './ui/components/home/home.component';
+import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { LayoutComponent } from './admin/layout/layout.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: 'admin', //Eger sayfa yapimiz birden fazla layout kullaniyorsa, path kismina layout adi girilir, sonrasinda gelen sayfalarin children oldugu belirtilerek nesne türünde cagrilir.
     component: LayoutComponent,
     children: [
       {
@@ -13,6 +15,10 @@ const routes: Routes = [
           import('./admin/components/customer/customer.module').then(
             (module) => module.CustomerModule
           ),
+      },
+      {
+        path: '',
+        component: DashboardComponent, //Ilgili layouta bagli ana sayfa niteligindeki alanlarin path kismi bos, component adi gelir
       },
       {
         path: 'products',
@@ -29,6 +35,24 @@ const routes: Routes = [
           ),
       },
     ],
+  },
+  {
+    path: '', //Ana layoutumuzun adini bos birakiyoruz
+    component: HomeComponent, //Ana layout tetiklendiginde ilk acilacak component adi girilir
+  },
+  {
+    path: 'basket',
+    loadChildren: () =>
+      import('./ui/components/basket/basket.module').then(
+        (module) => module.BasketModule
+      ),
+  },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./ui/components/products/products.module').then(
+        (module) => module.ProductsModule
+      ),
   },
 ];
 
