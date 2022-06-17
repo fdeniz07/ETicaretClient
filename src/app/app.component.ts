@@ -35,3 +35,7 @@ export class AppComponent {
 
 // Jquery nin testi
 // $(document).ready(()=>{alert("test")})
+
+$.get('https://localhost:7036/api/products', (data) => {
+  console.log(data);
+});
