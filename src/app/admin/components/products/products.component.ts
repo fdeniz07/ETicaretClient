@@ -2,7 +2,7 @@ import { HttpClientService } from './../../../services/common/http-client.servic
 import { BaseComponent, SpinnerType } from './../../../base/base.component';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Product } from 'src/app/contracts/product';
+import { Create_Product } from 'src/app/contracts/create_product';
 
 @Component({
   selector: 'app-products',
