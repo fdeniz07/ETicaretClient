@@ -1,7 +1,9 @@
+import { List_Product } from './../../../contracts/list_product';
 import { Create_Product } from './../../../contracts/create_product';
 import { HttpClientService } from './../http-client.service';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +39,24 @@ export class ProductService {
           errorCallBack(message);
         }
       );
+  }
+
+  async read(
+    successCallBack?: () => void,
+    errorCallBack?: (errorMessage: string) => void
+  ): Promise<List_Product[]> {
+    const promiseData: Promise<List_Product[]> = this.httpClientService
+      .get<List_Product[]>({
+        controller: 'products',
+      })
+      .toPromise();
+
+    promiseData
+      .then((d) => successCallBack())
+      .catch((errorResponse: HttpErrorResponse) =>
+        errorCallBack(errorResponse.message)
+      );
+
+    return await promiseData;
   }
 }
