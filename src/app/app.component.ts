@@ -13,24 +13,24 @@ declare var $: any;
 })
 export class AppComponent {
   title = 'ETicaretClient';
-  constructor(private toastrService: CustomToastrService) {
-    toastrService.message('Merhaba', 'Bilgi', {
-      messageType: ToastrMessageType.Error,
-      position: ToastrPosition.BottomCenter,
-    });
-    toastrService.message('Merhaba', 'Bilgi', {
-      messageType: ToastrMessageType.Warning,
-      position: ToastrPosition.TopCenter,
-    });
-    toastrService.message('Merhaba', 'Bilgi', {
-      messageType: ToastrMessageType.Success,
-      position: ToastrPosition.BottomLeft,
-    });
-    toastrService.message('Merhaba', 'Bilgi', {
-      messageType: ToastrMessageType.Info,
-      position: ToastrPosition.TopLeft,
-    });
-  }
+  // constructor(private toastrService: CustomToastrService) {
+  //   toastrService.message('Merhaba', 'Bilgi', {
+  //     messageType: ToastrMessageType.Error,
+  //     position: ToastrPosition.BottomCenter,
+  //   });
+  //   toastrService.message('Merhaba', 'Bilgi', {
+  //     messageType: ToastrMessageType.Warning,
+  //     position: ToastrPosition.TopCenter,
+  //   });
+  //   toastrService.message('Merhaba', 'Bilgi', {
+  //     messageType: ToastrMessageType.Success,
+  //     position: ToastrPosition.BottomLeft,
+  //   });
+  //   toastrService.message('Merhaba', 'Bilgi', {
+  //     messageType: ToastrMessageType.Info,
+  //     position: ToastrPosition.TopLeft,
+  //   });
+  // }
 }
 
 // Jquery nin testi

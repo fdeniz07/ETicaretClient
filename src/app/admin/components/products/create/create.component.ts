@@ -7,7 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { Create_Product } from './../../../../contracts/create_product';
 import { ProductService } from './../../../../services/common/models/product.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-create',
@@ -24,6 +24,8 @@ export class CreateComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  @Output() createdProduct: EventEmitter<Create_Product> = new EventEmitter();
 
   create(
     name: HTMLInputElement,
@@ -63,6 +65,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
           messageType: MessageType.Success,
           position: Position.TopRight,
         });
+        this.createdProduct.emit(create_product);
       },
       (errorMessage) => {
         this.alertify.message(errorMessage, {
