@@ -14,6 +14,8 @@ import {
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
+declare var $: any;
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -34,6 +36,8 @@ export class ListComponent extends BaseComponent implements OnInit {
     'price',
     'createdDate',
     'updatedDate',
+    'edit',
+    'delete',
   ];
 
   dataSource: MatTableDataSource<List_Product> = null;
@@ -52,13 +56,18 @@ export class ListComponent extends BaseComponent implements OnInit {
             messageType: MessageType.Error,
             position: Position.TopRight,
           })
-      )
+      );
 
     this.dataSource = new MatTableDataSource<List_Product>(
       allProducts.products
     );
     this.paginator.length = allProducts.totalCount;
   }
+
+  // delete(id, event) {
+  //   const img: HTMLImageElement = event.srcElement;
+  //   $(img.parentElement.parentElement).fadeOut(2000);
+  // }
 
   async pageChanged() {
     await this.getProducts();
