@@ -1,10 +1,11 @@
+import { FileUploadComponent } from './file-upload.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [FileUploadComponent],
   imports: [
     CommonModule
   ]
