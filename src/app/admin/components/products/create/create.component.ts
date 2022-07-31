@@ -1,3 +1,4 @@
+import { FileUploadOptions } from './../../../../services/common/file-upload/file-upload.component';
 import {
   AlertifyService,
   MessageType,
@@ -26,6 +27,13 @@ export class CreateComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {}
 
   @Output() createdProduct: EventEmitter<Create_Product> = new EventEmitter();
+  @Output() fileUploadOptions:Partial<FileUploadOptions>={
+    action:"upload",
+    controller:"products",
+    explanation:"Resimleri sürükleyin veya secin...",
+    isAdminPage:true,
+    accept:".png, .jpg, .jpeg, .gif"
+  };
 
   create(
     name: HTMLInputElement,
