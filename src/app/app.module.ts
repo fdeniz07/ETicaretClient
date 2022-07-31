@@ -9,8 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadComponent } from './services/common/file-upload/file-upload.component';
-
-
+import { FileUploadModule } from './services/common/file-upload/file-upload.module';
 
 
 @NgModule({
@@ -23,11 +22,11 @@ import { FileUploadComponent } from './services/common/file-upload/file-upload.c
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
-    { provide: 'baseUrl', useValue: 'https://localhost:7036/api', multi: true },
+    { provide: 'baseUrl', useValue: 'https://localhost:7036/api', multi: true }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
