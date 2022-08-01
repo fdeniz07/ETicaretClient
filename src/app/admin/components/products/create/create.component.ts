@@ -32,7 +32,7 @@ export class CreateComponent extends BaseComponent implements OnInit {
     controller:"products",
     explanation:"Resimleri sürükleyin veya secin...",
     isAdminPage:true,
-    accept:".png, .jpg, .jpeg, .gif"
+    accept:".png, .jpg, .jpeg, .gif, .json"
   };
 
   create(
