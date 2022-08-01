@@ -10,33 +10,33 @@ export class CustomToastrService {
   message(
     message: string,
     title: string,
-    toastrOptions:Partial<ToastrOptions>
+    toastrOptions: Partial<ToastrOptions>
   ) {
     this.toastr[toastrOptions.messageType](message, title, {
-      positionClass: toastrOptions.position
+      positionClass: toastrOptions.position,
     });
   }
 }
 
-export class ToastrOptions{
-  messageType:ToastrMessageType;
-  position:ToastrPosition
+export class ToastrOptions {
+  messageType: ToastrMessageType;
+  position: ToastrPosition;
 }
 
 export enum ToastrMessageType {
-  Error = "error",
-  Info = "info",
-  Success = "success",
-  Warning = "warning",
+  Error = 'error',
+  Info = 'info',
+  Success = 'success',
+  Warning = 'warning',
 }
 
 export enum ToastrPosition {
-  TopRight = "toast-top-right",
-  BottomRight = "toast-bottom-right",
-  BottomLeft = "toast-bottom-left",
-  TopLeft = "toast-top-left",
-  TopFullWidth = "toast-top-full-width",
-  BottomFullWidth = "toast-bottom-full-width",
-  TopCenter = "toast-top-center",
-  BottomCenter = "toast-bottom-center",
+  TopRight = 'toast-top-right',
+  BottomRight = 'toast-bottom-right',
+  BottomLeft = 'toast-bottom-left',
+  TopLeft = 'toast-top-left',
+  TopFullWidth = 'toast-top-full-width',
+  BottomFullWidth = 'toast-bottom-full-width',
+  TopCenter = 'toast-top-center',
+  BottomCenter = 'toast-bottom-center',
 }
