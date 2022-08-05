@@ -1,7 +1,3 @@
-import {
-  FileUploadDialogComponent,
-  FileUploadDialogState,
-} from './../../../dialogs/file-upload-dialog/file-upload-dialog.component';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,6 +6,12 @@ import {
   FileSystemFileEntry,
   NgxFileDropEntry,
 } from 'ngx-file-drop';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from '../../../base/base.component';
+import {
+  FileUploadDialogComponent,
+  FileUploadDialogState,
+} from '../../../dialogs/file-upload-dialog/file-upload-dialog.component';
 import {
   AlertifyService,
   MessageType,
@@ -20,8 +22,9 @@ import {
   ToastrMessageType,
   ToastrPosition,
 } from '../../ui/custom-toastr.service';
-import { HttpClientService } from '../http-client.service';
 import { DialogService } from '../dialog.service';
+import { HttpClientService } from '../http-client.service';
+
 @Component({
   selector: 'app-file-upload',
   templateUrl: './file-upload.component.html',
@@ -33,7 +36,8 @@ export class FileUploadComponent {
     private alertifyService: AlertifyService,
     private customToastrService: CustomToastrService,
     private dialog: MatDialog,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService
   ) {}
 
   public files: NgxFileDropEntry[];
@@ -52,6 +56,7 @@ export class FileUploadComponent {
       componentType: FileUploadDialogComponent,
       data: FileUploadDialogState.Yes,
       afterClosed: () => {
+        this.spinner.show(SpinnerType.BallBeat);
         this.httpClientService
           .post(
             {
@@ -66,6 +71,7 @@ export class FileUploadComponent {
             (data) => {
               const message: string = 'Dosyalar başarıyla yüklenmiştir.';
 
+              this.spinner.hide(SpinnerType.BallBeat);
               if (this.options.isAdminPage) {
                 this.alertifyService.message(message, {
                   dismissOthers: true,
@@ -83,6 +89,7 @@ export class FileUploadComponent {
               const message: string =
                 'Dosyalar yüklenirken beklenmeyen bir hatayla karşılaşılmıştır.';
 
+              this.spinner.hide(SpinnerType.BallBeat);
               if (this.options.isAdminPage) {
                 this.alertifyService.message(message, {
                   dismissOthers: true,
