@@ -1,3 +1,5 @@
+import { SelectProductImageDialogComponent } from './../../../../dialogs/select-product-image-dialog/select-product-image-dialog.component';
+import { DialogService } from './../../../../services/common/dialog.service';
 import {
   AlertifyService,
   MessageType,
@@ -25,7 +27,8 @@ export class ListComponent extends BaseComponent implements OnInit {
   constructor(
     spinner: NgxSpinnerService,
     private productService: ProductService,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private dialogService: DialogService
   ) {
     super(spinner);
   }
@@ -36,6 +39,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     'price',
     'createdDate',
     'updatedDate',
+    'photos',
     'edit',
     'delete',
   ];
@@ -68,6 +72,16 @@ export class ListComponent extends BaseComponent implements OnInit {
   //   const img: HTMLImageElement = event.srcElement;
   //   $(img.parentElement.parentElement).fadeOut(2000);
   // }
+
+  addProductImages(id: string) {
+    this.dialogService.openDialog({
+      componentType: SelectProductImageDialogComponent,
+      data: id,
+      options: {
+        width: '1400px',
+      },
+    });
+  }
 
   async pageChanged() {
     await this.getProducts();
