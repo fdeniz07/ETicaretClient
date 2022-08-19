@@ -9,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BasketComponent extends BaseComponent implements OnInit {
 
-  constructor(spinner:NgxSpinnerService) { 
+  constructor(spinner:NgxSpinnerService) {
     super(spinner);
   }
 
   ngOnInit(): void {
-    this.showSpinner(SpinnerType.BallClipRotate);
+    // this.showSpinner(SpinnerType.BallClipRotate);
   }
 
 }

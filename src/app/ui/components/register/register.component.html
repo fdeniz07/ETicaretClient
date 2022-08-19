@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)">
+      <div class="mb-3">
+        <label for="firstNameLastName" class="form-label">Ad Soyad</label>
+        <input type="text" class="form-control" id="firstNameLastName" formControlName="firstNameLastName"
+          aria-describedby="adSoyad" placeholder="Ad Soyad" [ngClass]="{
+            'is-invalid': submitted && component.firstNameLastName.errors}" />
+        <div class="form-text invalid-feedback" *ngIf="submitted && component.firstNameLastName.errors.required">
+          Lütfen ad soyadı boş geçmeyiniz.
+        </div>
+        <div class="form-text invalid-feedback"
+          *ngIf="submitted && (component.firstNameLastName.errors.maxlength || component.firstNameLastName.errors.minlength)">
+          Ad Soyad alanı 3 karakterden az, 50 karakterden fazla olamaz.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="userName" class="form-label">Kullanıcı Adı</label>
+        <input type="text" class="form-control" id="userName" formControlName="userName" aria-describedby="userName"
+          placeholder="Kullanıcı Adı" [ngClass]="{
+            'is-invalid': submitted && component.userName.errors}" />
+        <div class="form-text invalid-feedback" *ngIf="submitted && component.userName.errors.required">Lütfen Kullanıcı
+          adını boş geçmeyiniz.
+        </div>
+        <div class="form-text invalid-feedback"
+          *ngIf="submitted && (component.userName.errors.maxlength || component.userName.errors.minlength)">
+          Kullanıcı adı alanı 3 karakterden az, 50 karakterden fazla olamaz.
+        </div>
+      </div>
+
+      <div class=" mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email" aria-describedby="email" placeholder="Email" />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Şifre</label>
+        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Şifre" />
+      </div>
+      <div class="mb-3">
+        <label for="passwordControl" class="form-label">Şifre Tekrarı</label>
+        <input type="password" class="form-control" id="passwordControl" formControlName="passwordControl"
+          placeholder="Şifre Tekrarı" />
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+    </form>
+  </div>
+</div>
