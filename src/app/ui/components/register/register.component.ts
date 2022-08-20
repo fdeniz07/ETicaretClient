@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { User } from 'src/app/entities/user';
 
 @Component({
   selector: 'app-register',
@@ -7,35 +8,52 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) { }
 
   frm: FormGroup;
 
   ngOnInit(): void {
     this.frm = this.formBuilder.group({
-      firstNameLastName: [
-        "",
+      firstNameLastName: ["",
         [
           Validators.required,
           Validators.maxLength(50),
-          Validators.minLength(3),
-        ],
+          Validators.minLength(3)
+        ]
       ],
-      userName: [
-        "",
+      userName: ["",
         [
           Validators.required,
           Validators.maxLength(50),
-          Validators.minLength(3),
-        ],
+          Validators.minLength(3)
+        ]
       ],
-      email: [
-        "",
-        [Validators.required, Validators.maxLength(50), Validators.email],
+      email: ["",
+        [
+          Validators.required,
+          Validators.maxLength(250),
+          Validators.email
+        ]
       ],
-      password: [''],
-      passwordControl: [''],
-    });
+      password: ['',
+        [
+          Validators.required,
+        ]
+      ],
+      passwordControl: ['',
+        [
+          Validators.required
+        ]
+      ]
+    },
+      {
+        validators: (group: AbstractControl): ValidationErrors | null => {
+          let password = group.get("password").value;
+          let passwordControl = group.get("passwordControl").value;
+          // debugger;
+          return password === passwordControl ? null : { notSame: true };
+        }
+      });
   }
 
   get component() {
@@ -43,14 +61,14 @@ export class RegisterComponent implements OnInit {
   }
 
   submitted: boolean = false;
-  onSubmit(data: any) {
+  onSubmit(data: User) {
     this.submitted = true;
 
-    var c = this.component;
-    debugger;
+    // var f = this.frm;
+    // var c = this.component;
+    // var d = this.frm.hasError("notSame");
+    // debugger;
 
     if (this.frm.invalid) return;
-
-
   }
 }
