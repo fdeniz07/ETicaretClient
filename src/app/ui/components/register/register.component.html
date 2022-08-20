@@ -3,15 +3,15 @@
   <div class="col-md-6">
     <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)">
       <div class="mb-3">
-        <label for="firstNameLastName" class="form-label">Ad Soyad</label>
-        <input type="text" class="form-control" id="firstNameLastName" formControlName="firstNameLastName"
+        <label for="nameSurname" class="form-label">Ad Soyad</label>
+        <input type="text" class="form-control" id="firstNameLastName" formControlName="nameSurname"
           aria-describedby="adSoyad" placeholder="Ad Soyad" [ngClass]="{
-            'is-invalid': submitted && component.firstNameLastName.errors}" />
-        <div class="form-text invalid-feedback" *ngIf="submitted && component.firstNameLastName.errors?.required">
+            'is-invalid': submitted && component.nameSurname.errors}" />
+        <div class="form-text invalid-feedback" *ngIf="submitted && component.nameSurname.errors?.required">
           Lütfen Ad Soyad alanını boş geçmeyiniz.
         </div>
         <div class="form-text invalid-feedback"
-          *ngIf="submitted && (component.firstNameLastName.errors?.maxlength || component.firstNameLastName.errors?.minlength)">
+          *ngIf="submitted && (component.nameSurname.errors?.maxlength || component.nameSurname.errors?.minlength)">
           Ad Soyad alanı 3 karakterden az, 50 karakterden fazla olamaz.
         </div>
       </div>
@@ -56,10 +56,10 @@
       </div>
 
       <div class="mb-3">
-        <label for="passwordControl" class="form-label">Şifre Tekrarı</label>
-        <input type="password" class="form-control" id="passwordControl" formControlName="passwordControl"
+        <label for="passwordConfirm" class="form-label">Şifre Tekrarı</label>
+        <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm"
           placeholder="Şifre Tekrarı" [ngClass]="{
-            'is-invalid': submitted && component.passwordControlerrors}" />
+            'is-invalid': submitted && component.passwordConfirm.errors}" />
         <div *ngIf="submitted && frm.hasError('notSame')">
           Girilen Şifreler uyuşmuyor. Lütfen tekrar kontrol ediniz.
         </div>
