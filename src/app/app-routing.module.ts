@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/common/auth.guard';
 import { HomeComponent } from './ui/components/home/home.component';
 import { DashboardComponent } from './admin/components/dashboard/dashboard.component';
 import { LayoutComponent } from './admin/layout/layout.component';
@@ -14,27 +15,27 @@ const routes: Routes = [
         loadChildren: () =>
           import('./admin/components/customer/customer.module').then(
             (module) => module.CustomerModule
-          ),
+          ),canActivate: [AuthGuard]
       },
       {
         path: '',
-        component: DashboardComponent, //Ilgili layouta bagli ana sayfa niteligindeki alanlarin path kismi bos, component adi gelir
+        component: DashboardComponent,canActivate: [AuthGuard] //Ilgili layouta bagli ana sayfa niteligindeki alanlarin path kismi bos, component adi gelir
       },
       {
         path: 'products',
         loadChildren: () =>
           import('./admin/components/products/products.module').then(
             (module) => module.ProductsModule
-          ),
+          ),canActivate: [AuthGuard]
       },
       {
         path: 'orders',
         loadChildren: () =>
           import('./admin/components/order/order.module').then(
             (module) => module.OrderModule
-          ),
+          ),canActivate: [AuthGuard]
       },
-    ],
+    ], canActivate: [AuthGuard]
   },
   {
     path: '', //Ana layoutumuzun adini bos birakiyoruz

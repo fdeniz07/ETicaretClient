@@ -10,10 +10,10 @@ import { BaseComponent } from 'src/app/base/base.component';
 })
 export class OrderComponent extends BaseComponent implements OnInit {
   constructor(spinner: NgxSpinnerService) {
-    super(spinner); 
+    super(spinner);
   }
 
   ngOnInit(): void {
-    this.showSpinner(SpinnerType.BallClipRotatePulse);
+    // this.showSpinner(SpinnerType.BallClipRotatePulse);
   }
 }

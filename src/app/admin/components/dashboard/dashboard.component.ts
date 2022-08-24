@@ -18,7 +18,7 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showSpinner(SpinnerType.BallClipRotate);
+    // this.showSpinner(SpinnerType.BallClipRotate);
   }
 
   m() {
