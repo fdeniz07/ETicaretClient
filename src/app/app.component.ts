@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './services/common/auth.service';
 import { Component } from '@angular/core';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
@@ -10,13 +11,14 @@ declare var $: any;
 })
 export class AppComponent {
 
-  constructor(public authService: AuthService, private toastrService: CustomToastrService) {
+  constructor(public authService: AuthService, private toastrService: CustomToastrService, private router: Router) {
     authService.idendityCheck();
   }
 
   signOut() {
     localStorage.removeItem("accessToken");
     this.authService.idendityCheck();
+    this.router.navigate([""]);
     this.toastrService.message("Oturum kapatılmıştır!", "Oturum Kapatıldı", {
       messageType: ToastrMessageType.Warning,
       position: ToastrPosition.TopRight

@@ -3,6 +3,7 @@ import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { UserService } from './../../../services/common/models/user.service';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LoginComponent extends BaseComponent implements OnInit {
 
-  constructor(private userService: UserService, spinner: NgxSpinnerService,private authService:AuthService) {
+  constructor(private userService: UserService, spinner: NgxSpinnerService, private authService: AuthService, private activatedRoote: ActivatedRoute, private router: Router) {
     super(spinner)
   }
 
@@ -22,6 +23,13 @@ export class LoginComponent extends BaseComponent implements OnInit {
     this.showSpinner(SpinnerType.BallBeat);
     await this.userService.login(userNameOrEmail, password, () => {
       this.authService.idendityCheck();
+
+      this.activatedRoote.queryParams.subscribe(params => {
+        const returnUrl: string = params["returnUrl"];
+        if (returnUrl)
+          this.router.navigate([returnUrl]);
+      });
+
       this.hideSpinner(SpinnerType.BallBeat)
     });
   }
