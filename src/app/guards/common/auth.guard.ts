@@ -1,3 +1,4 @@
+import { AuthService, _isAuthenticated } from './../../services/common/auth.service';
 import { SpinnerType } from './../../base/base.component';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from './../../services/ui/custom-toastr.service';
 import { Injectable } from '@angular/core';
@@ -10,26 +11,29 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router, private toastrService: CustomToastrService, private spinner: NgxSpinnerService) {
+  constructor(private jwtHelper: JwtHelperService, private router: Router, private toastrService: CustomToastrService, private spinner: NgxSpinnerService, private authService: AuthService) {
 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.spinner.show(SpinnerType.BallBeat);
-    const token: string = localStorage.getItem("accessToken");
+    //     const token: string = localStorage.getItem("accessToken");
 
-    //const decodeToken = this.jwtHelper.decodeToken(token);
-    //const expirationDate: Date = this.jwtHelper.getTokenExpirationDate(token);
-    //const expired: boolean = this.jwtHelper.isTokenExpired(token);
+    //     //const decodeToken = this.jwtHelper.decodeToken(token);
+    //     //const expirationDate: Date = this.jwtHelper.getTokenExpirationDate(token);
+    //     //const expired: boolean = this.jwtHelper.isTokenExpired(token);
 
-    let expired: boolean;
-    try {
-      expired = this.jwtHelper.isTokenExpired(token);
-    } catch {
-      expired = true;
-    }
+    //     let expired: boolean;
 
-    if (!token || expired) {
+    // // Burada token gercek mi, var mi yok mu ve token süresinin kontrolünü yapiyoruz
+
+    //     try {
+    //       expired = this.jwtHelper.isTokenExpired(token);
+    //     } catch {
+    //       expired = true;
+    //     }
+  
+    if (!_isAuthenticated) {
       this.router.navigate(["login"], { queryParams: { returnUrl: state.url } });
       this.toastrService.message("Oturum açmanız gerekiyor!", "Yetkisiz Erişim!", {
         messageType: ToastrMessageType.Warning,

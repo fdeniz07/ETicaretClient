@@ -5,10 +5,13 @@
 <router-outlet></router-outlet>
 Bir sayfada <-html de yönlendirme islemi yapabilmek (router-outlet tag'ini kullanabilmek) icin, o component'in declere edildigi modülde RouterModule'in ekli olmasi gerekmektedir. -->
 <app-header></app-header>
+
 <mat-drawer-container class="admin-container">
-  <mat-drawer mode="side" opened class="sidebar-left"
-    ><app-sidebar></app-sidebar
-  ></mat-drawer>
-  <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
+  <mat-drawer mode="side" opened class="sidebar-left">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
 </mat-drawer-container>
 <app-footer></app-footer>

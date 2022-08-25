@@ -1,9 +1,6 @@
+import { AuthService } from './services/common/auth.service';
 import { Component } from '@angular/core';
-import {
-  CustomToastrService,
-  ToastrMessageType,
-  ToastrPosition,
-} from './services/ui/custom-toastr.service';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from './services/ui/custom-toastr.service';
 declare var $: any;
 
 @Component({
@@ -12,7 +9,21 @@ declare var $: any;
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ETicaretClient';
+
+  constructor(public authService: AuthService, private toastrService: CustomToastrService) {
+    authService.idendityCheck();
+  }
+
+  signOut() {
+    localStorage.removeItem("accessToken");
+    this.authService.idendityCheck();
+    this.toastrService.message("Oturum kapatılmıştır!", "Oturum Kapatıldı", {
+      messageType: ToastrMessageType.Warning,
+      position: ToastrPosition.TopRight
+    })
+  }
+
+
   // constructor(private toastrService: CustomToastrService) {
   //   toastrService.message('Merhaba', 'Bilgi', {
   //     messageType: ToastrMessageType.Error,
@@ -36,6 +47,6 @@ export class AppComponent {
 // Jquery nin testi
 // $(document).ready(()=>{alert("test")})
 
-$.get('https://localhost:7036/api/products', (data) => {
-  console.log(data);
-});
+// $.get('https://localhost:7036/api/products', (data) => {
+//   console.log(data);
+// });
