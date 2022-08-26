@@ -12,12 +12,12 @@ declare var $: any;
 export class AppComponent {
 
   constructor(public authService: AuthService, private toastrService: CustomToastrService, private router: Router) {
-    authService.idendityCheck();
+    authService.identityCheck();
   }
 
   signOut() {
     localStorage.removeItem("accessToken");
-    this.authService.idendityCheck();
+    this.authService.identityCheck();
     this.router.navigate([""]);
     this.toastrService.message("Oturum kapatılmıştır!", "Oturum Kapatıldı", {
       messageType: ToastrMessageType.Warning,
