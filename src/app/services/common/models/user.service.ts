@@ -1,12 +1,13 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
-import { Observable, async, firstValueFrom } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Create_User } from 'src/app/contracts/users/create_user';
-import { User } from 'src/app/entities/user';
-import { HttpClientService } from '../http-client.service';
+import { Toast } from 'ngx-toastr';
+import { firstValueFrom, Observable } from 'rxjs';
+import { Token } from '../../../contracts/token/token';
+import { TokenResponse } from '../../../contracts/token/tokenResponse';
+import { Create_User } from '../../../contracts/users/create_user';
+import { User } from '../../../entities/user';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui/custom-toastr.service';
-import { Token } from 'src/app/contracts/token/token';
-import { TokenResponse } from 'src/app/contracts/token/tokenResponse';
+import { HttpClientService } from '../http-client.service';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,7 @@ export class UserService {
       action: "google-login",
       controller: "users"
     }, user);
-
+   
     const tokenResponse: TokenResponse = await firstValueFrom(observable) as TokenResponse;
 
     if (tokenResponse) {
@@ -57,6 +58,26 @@ export class UserService {
         messageType: ToastrMessageType.Success,
         position: ToastrPosition.TopRight
       });
+    }
+
+    callBackFunction();
+  }
+
+  async facebookLogin(user: SocialUser, callBackFunction?: () => void): Promise<any> {
+    const observable: Observable<SocialUser | TokenResponse> = this.httpClientService.post<SocialUser | TokenResponse>({
+      controller: "users",
+      action: "facebook-login"
+    }, user);
+
+    const tokenResponse: TokenResponse = await firstValueFrom(observable) as TokenResponse;
+
+    if (tokenResponse) {
+      localStorage.setItem("accessToken", tokenResponse.token.accessToken);
+
+      this.toastrService.message("Facebook üzerinden giriş başarıyla sağlanmıştır.", "Giriş Başarılı", {
+        messageType: ToastrMessageType.Success,
+        position: ToastrPosition.TopRight
+      })
     }
 
     callBackFunction();
