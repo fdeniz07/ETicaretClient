@@ -21,18 +21,18 @@ export class LoginComponent extends BaseComponent implements OnInit {
     super(spinner)
     socialAuthService.authState.subscribe(async (user: SocialUser) => {
       console.log(user)
-      this.showSpinner(SpinnerType.BallBeat);
+      this.showSpinner(SpinnerType.LineSpinClockwiseFade);
       switch (user.provider) {
         case "GOOGLE":
           await userAuthService.googleLogin(user, () => {
             this.authService.identityCheck();
-            this.hideSpinner(SpinnerType.BallBeat);
+            this.hideSpinner(SpinnerType.LineSpinClockwiseFade);
           })
           break;
         case "FACEBOOK":
           await userAuthService.facebookLogin(user, () => {
             this.authService.identityCheck();
-            this.hideSpinner(SpinnerType.BallBeat);
+            this.hideSpinner(SpinnerType.LineSpinClockwiseFade);
           })
           break;
         case "MICROSOFT":
@@ -52,7 +52,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   }
 
   async login(usernameOrEmail: string, password: string) {
-    this.showSpinner(SpinnerType.BallBeat);
+    this.showSpinner(SpinnerType.LineSpinClockwiseFade);
     await this.userAuthService.login(usernameOrEmail, password, () => {
       this.authService.identityCheck();
 
@@ -61,7 +61,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
         if (returnUrl)
           this.router.navigate([returnUrl]);
       });
-      this.hideSpinner(SpinnerType.BallBeat);
+      this.hideSpinner(SpinnerType.LineSpinClockwiseFade);
     });
   }
 
