@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 import { DialogPosition, MatDialog } from '@angular/material/dialog';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class DialogService {
-  constructor(private dialog: MatDialog) {}
+
+  constructor(private dialog: MatDialog) { }
+
 
   openDialog(dialogParameters: Partial<DialogParameters>): void {
     const dialogRef = this.dialog.open(dialogParameters.componentType, {
@@ -16,10 +18,12 @@ export class DialogService {
       data: dialogParameters.data,
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result == dialogParameters.data) dialogParameters.afterClosed();
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == dialogParameters.data)
+        dialogParameters.afterClosed();
     });
   }
+
 }
 
 export class DialogParameters {
@@ -30,7 +34,7 @@ export class DialogParameters {
 }
 
 export class DialogOptions {
-  width?: string = '250px';
+  width?: string = "250px";
   height?: string;
   position?: DialogPosition;
 }

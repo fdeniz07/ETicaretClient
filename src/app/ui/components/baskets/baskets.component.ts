@@ -4,10 +4,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-basket',
-  templateUrl: './basket.component.html',
-  styleUrls: ['./basket.component.scss']
+  templateUrl: './baskets.component.html',
+  styleUrls: ['./baskets.component.scss']
 })
-export class BasketComponent extends BaseComponent implements OnInit {
+export class BasketsComponent extends BaseComponent implements OnInit {
 
   constructor(spinner:NgxSpinnerService) {
     super(spinner);

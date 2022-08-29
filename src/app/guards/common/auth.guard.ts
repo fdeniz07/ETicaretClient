@@ -11,12 +11,12 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router, private toastrService: CustomToastrService, private spinner: NgxSpinnerService, private authService: AuthService) {
+  constructor(private jwtHelper: JwtHelperService, private router: Router, private toastrService: CustomToastrService, private spinner: NgxSpinnerService) {
 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    this.spinner.show(SpinnerType.BallBeat);
+    this.spinner.show(SpinnerType.BallClipRotate);
     //     const token: string = localStorage.getItem("accessToken");
 
     //     //const decodeToken = this.jwtHelper.decodeToken(token);
@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
     //     } catch {
     //       expired = true;
     //     }
-  
+
     if (!_isAuthenticated) {
       this.router.navigate(["login"], { queryParams: { returnUrl: state.url } });
       this.toastrService.message("Oturum açmanız gerekiyor!", "Yetkisiz Erişim!", {
@@ -41,7 +41,8 @@ export class AuthGuard implements CanActivate {
       })
     }
 
-    this.spinner.hide(SpinnerType.BallBeat);
+
+    this.spinner.hide(SpinnerType.BallClipRotate);
 
     return true;
   }
